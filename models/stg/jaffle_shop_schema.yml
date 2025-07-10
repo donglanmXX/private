@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop_customers
+    description: "Staging model for jaffle shop customers"
+    config:
+      tags: ["jaffle_shop", "customers"]
+    columns:
+      - name: customer_id
+        description: "Identifier for the customer"
+        tests:
+          - not_null
+          - unique
+      - name: first_name
+        description: "customer first_name"
+      - name: last_name
+        description: "customer last_name"
+  - name: stg_jaffle_shop_orders
+    description: "Staging model for jaffle shop orders"
+    config:
+      tags: ["jaffle_shop", "orders"]
+    columns:
+      - name: order_id
+        description: "Identifier for order"
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "customer_id"
+      - name: order_date
+        description: "order_date"
+      - name: status
+        description: '{{ doc("order_status") }}'
+        tests:
+          - accepted_values:
+              values: ['shipped','return_pending','completed','returned','placed']

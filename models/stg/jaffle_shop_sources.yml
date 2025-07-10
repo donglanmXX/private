@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    database: delta-button-464815-v3
+    schema: dbt_dmao
+    tables:
+      - name: jaffle_shop_orders
+        loaded_at_field: _etl_loaded_at
+        freshness:
+          warn_after: {count: 12, period: day}
+          error_after: {count: 24, period: day}
+      - name: jaffle_shop_customers
+      - name: stripe_payments
